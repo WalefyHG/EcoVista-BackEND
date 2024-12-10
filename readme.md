@@ -51,6 +51,15 @@ Este é o repositório do back-end do projeto EcoVista, desenvolvido utilizando 
     python manage.py migrate
     ```
 
+3. Criando os APPS:
+    ```bash
+    python manage.py create_module_app token
+    ```
+4. Deletando os APPS:
+    ```
+    python manage.py delete_module_app token
+    ```
+
 ## Executando o Projeto
 
 1. Inicie o servidor de desenvolvimento:
