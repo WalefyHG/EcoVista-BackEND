@@ -71,7 +71,7 @@ Este é o repositório do back-end do projeto EcoVista, desenvolvido utilizando 
 
 ## Endpoints
 
-Os endpoints da API estão documentados automaticamente pelo Django Ninja Extra e podem ser acessados em `http://127.0.0.1:8000/api/docs`.
+Os endpoints da API estão documentados automaticamente pelo Django Ninja Extra e podem ser acessados em `http://127.0.0.1:8000/api/v1/docs`.
 
 ## Contribuição
 
