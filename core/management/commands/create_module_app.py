@@ -48,10 +48,39 @@ class Command(BaseCommand):
         with open(os.path.join(app_dir, "migrations", "__init__.py"), "w") as f:
             pass  # Arquivo vazio
 
+        # Criar os novos arquivos: repository.py, schemas.py e controllers.py
+        self.create_repository(app_dir)
+        self.create_schemas(app_dir)
+        self.create_controllers(app_dir)
+
         self.stdout.write(self.style.SUCCESS(f"App '{app_name}' criado com sucesso em 'modules/{app_name}'"))
 
         # Adicionar o app no settings.py
         self.add_to_settings(f"modules.{app_name}")
+
+    def create_repository(self, app_dir):
+        repository_file = os.path.join(app_dir, "repository.py")
+        with open(repository_file, "w") as f:
+            f.write(
+                "# Repository"
+            )
+        self.stdout.write(self.style.SUCCESS(f"Arquivo 'repository.py' criado em '{app_dir}'"))
+
+    def create_schemas(self, app_dir):
+        schemas_file = os.path.join(app_dir, "schemas.py")
+        with open(schemas_file, "w") as f:
+            f.write(
+                "# Schemas "
+            )
+        self.stdout.write(self.style.SUCCESS(f"Arquivo 'schemas.py' criado em '{app_dir}'"))
+
+    def create_controllers(self, app_dir):
+        controllers_file = os.path.join(app_dir, "controllers.py")
+        with open(controllers_file, "w") as f:
+            f.write(
+                "# Controllers"
+            )
+        self.stdout.write(self.style.SUCCESS(f"Arquivo 'controllers.py' criado em '{app_dir}'"))
 
     def add_to_settings(self, app_path):
         # Ajuste para localizar o settings.py dentro de 'core'

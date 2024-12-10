@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'change_me')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv('DEBUG', 0)))
 
-ALLOWED_HOSTS = [""]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -50,8 +50,6 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS= [
     'core',
-    'modules.users',
-    'modules.main',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -145,6 +143,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
