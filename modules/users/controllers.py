@@ -4,6 +4,7 @@ from modules.users.services import Services
 from modules.users.schemas import UserListSchema, UserPostSchema, UserPutSchema, ErrorResponse
 from typing import List
 from ninja import Form, File, UploadedFile
+from modules.utils.permission.permissions import AdminPermission
 
 
 @api_controller(
@@ -15,7 +16,7 @@ class UsersController:
     
     services = Services
     
-    @route.get('', response={200: List[UserListSchema]})
+    @route.get('', response={200: List[UserListSchema]}, permissions=[AdminPermission])
     def list(self, request):
         return self.services.list()
     

@@ -14,7 +14,9 @@ class BaseAcess(BasePermission):
         if request.user.is_superuser:
             return True
         
-        role = request.user.type_user
+        role = getattr(request.user, 'role', None)
         
         if role == self.ROLE_USER:
             return role
+        
+        return False

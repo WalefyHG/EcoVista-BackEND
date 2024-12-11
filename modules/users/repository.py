@@ -34,6 +34,14 @@ class Repository:
         if "password" in payload:
             payload["password"] = cls.password_hash(payload["password"])
         
+        if "role" in payload and payload["role"] == "admin":
+            payload["is_superuser"] = True
+            payload["is_staff"] = True
+        else:
+            payload["is_superuser"] = False
+            payload["is_staff"] = False
+            
+        
         updated_payload: Dict = {
             **payload
         }
