@@ -90,6 +90,58 @@ Os endpoints da API estão documentados automaticamente pelo Django Ninja Extra 
     ```
 5. Abra um Pull Request.
 
+## Arquitetura do Projeto
+
+O projeto EcoVista Back-End segue uma arquitetura em camadas, dividida em Repository, Models e Controller. Abaixo está uma descrição das pastas e da estrutura do projeto:
+
+### Estrutura de Pastas
+
+Esse é um exemplo da arquitetura do projeto
+
+- `EcoVista_BackEnd/`
+    - `apps/`
+        - `token/`
+            - `migrations/`
+            - `models.py`
+            - `views.py`
+            - `serializers.py`
+            - `urls.py`
+            - `services.py`
+            - `repositories.py`
+    - `core/`
+        - `settings.py`
+        - `urls.py`
+        - `wsgi.py`
+    - `manage.py`
+    - `requirements.txt`
+
+### Camadas
+
+#### Repository
+
+A camada de Repository é responsável pela comunicação direta com o banco de dados. Ela contém classes e métodos que realizam operações de CRUD (Create, Read, Update, Delete). No projeto, essa camada está representada pelos arquivos `repositories.py` dentro de cada app.
+
+#### Services
+
+A camada de Services contém a lógica de negócios da aplicação. Ela é responsável por implementar as regras de negócio e orquestrar as operações entre as diferentes camadas. No projeto, essa camada está representada pelos arquivos `services.py` dentro de cada app.
+
+#### Controller
+
+A camada de Controller gerencia a lógica de aplicação e a interação entre as camadas de Models e Repository. No Django, essa camada é representada pelos arquivos `views.py`, que contêm as views responsáveis por processar as requisições HTTP e retornar as respostas apropriadas.
+
+### Exemplo de Arquitetura em um App
+
+#### `token/models.py`
+Define os modelos relacionados ao token, como a estrutura de dados e as relações.
+
+#### `token/repositories.py`
+Contém classes e métodos para operações de CRUD relacionadas aos modelos de token.
+
+#### `token/views.py`
+Gerencia as requisições HTTP relacionadas aos tokens, utilizando os modelos e repositórios para processar os dados.
+
+Essa arquitetura em camadas ajuda a manter o código organizado, facilitando a manutenção e a escalabilidade do projeto.
+
 ## Licença
 
 Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
