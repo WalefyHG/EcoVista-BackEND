@@ -37,6 +37,6 @@ class UsersController:
     def delete(self, request, id: int):
         return self.services.delete(id=id)
     
-    @route.put('picture/{id}', response={201: UserListSchema, 400: ErrorResponse, 500: ErrorResponse})
+    @route.put('picture/{id}', response={201: UserListSchema, 404: ErrorResponse, 500: ErrorResponse})
     def put_picture(self, request, id: int, profile_picture: UploadedFile = File(...)):
         return self.services.put_picture(id=id, file=profile_picture)

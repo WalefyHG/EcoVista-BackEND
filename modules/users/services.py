@@ -129,7 +129,7 @@ class Services:
                 
                 instance: models.Model = message_or_object
 
-                instance = cls.repository.picture_update(
+                instance = cls.repository.put_picture(
                     instance=instance, file=file, id=id
                 )
 
