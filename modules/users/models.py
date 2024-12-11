@@ -11,7 +11,7 @@ class User(AbstractUser):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(max_length=80, unique=True)
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=128)
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)

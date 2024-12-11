@@ -1,5 +1,6 @@
 from ninja_extra import NinjaExtraAPI
 from modules.users.controllers import UsersController
+from modules.token.controller import TokenController
 
 api = NinjaExtraAPI(
     title= "EcoVista API",
@@ -9,3 +10,5 @@ api = NinjaExtraAPI(
 )
 
 api.register_controllers(UsersController)
+
+api.register_controllers(TokenController)
