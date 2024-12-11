@@ -60,6 +60,15 @@ Este é o repositório do back-end do projeto EcoVista, desenvolvido utilizando 
     python manage.py delete_module_app token
     ```
 
+5. Crie um superusuário para acessar a documentação:
+    ```bash
+    python manage.py createsuperuser
+    ```
+    Preencha os campos solicitados:
+    - Email
+    - Password
+    - Username
+
 ## Executando o Projeto
 
 1. Inicie o servidor de desenvolvimento:
