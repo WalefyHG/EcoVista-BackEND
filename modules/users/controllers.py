@@ -23,7 +23,7 @@ class UsersController:
     def get(self, request, id: int):
         return self.services.get(id=id)
     
-    @route.post('', response={201: UserListSchema, 500: ErrorResponse})
+    @route.post('', response={201: UserListSchema, 500: ErrorResponse}, auth=None)
     def post(self, request, payload: UserPostSchema = Form(...), profile_picture: UploadedFile = File(None)):
         
         return self.services.post(payload=payload.dict(), file=profile_picture)

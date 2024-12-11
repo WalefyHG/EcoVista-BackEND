@@ -25,10 +25,7 @@ class CustomTokenObtain(TokenObtainPairInputSchema):
     
     def output_schema(self) -> CustomTokenOutObtain:
         token = getattr(self.to_response_schema(), 'access', None)
-        print(f"Token gerado: {token}")
-        
-        user_schema = UserListSchema.from_orm(self.user)
-        print(f"User schema: {user_schema}")
+        user_schema = UserListSchema.from_orm(self._user)
         return CustomTokenOutObtain(token=token, user=user_schema)
 
         
