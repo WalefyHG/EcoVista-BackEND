@@ -3,6 +3,7 @@ from ninja_extra import NinjaExtraAPI
 from ninja_jwt.authentication import JWTAuth
 from django.contrib.admin.views.decorators import staff_member_required
 
+
 # Import Controllers
 
 from modules.users.controllers import UsersController
