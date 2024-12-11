@@ -127,7 +127,7 @@ A camada de Services contém a lógica de negócios da aplicação. Ela é respo
 
 #### Controller
 
-A camada de Controller gerencia a lógica de aplicação e a interação entre as camadas de Models e Repository. No Django, essa camada é representada pelos arquivos `views.py`, que contêm as views responsáveis por processar as requisições HTTP e retornar as respostas apropriadas.
+A camada de Controller gerencia a lógica de aplicação e a interação entre as camadas de Models e Repository. No Django, essa camada é representada pelos arquivos `controllers.py`, que contêm as views responsáveis por processar as requisições HTTP e retornar as respostas apropriadas.
 
 ### Exemplo de Arquitetura em um App
 
@@ -137,7 +137,7 @@ Define os modelos relacionados ao token, como a estrutura de dados e as relaçõ
 #### `token/repositories.py`
 Contém classes e métodos para operações de CRUD relacionadas aos modelos de token.
 
-#### `token/views.py`
+#### `token/controller.py`
 Gerencia as requisições HTTP relacionadas aos tokens, utilizando os modelos e repositórios para processar os dados.
 
 Essa arquitetura em camadas ajuda a manter o código organizado, facilitando a manutenção e a escalabilidade do projeto.

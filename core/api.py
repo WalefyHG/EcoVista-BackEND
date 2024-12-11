@@ -26,6 +26,9 @@ api = NinjaExtraAPI(
     )
 )
 
+# Controllers do Usuario
 api.register_controllers(UsersController)
 
+
+# Core Registers
 api.register_controllers(TokenController)
