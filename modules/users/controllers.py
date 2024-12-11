@@ -9,7 +9,7 @@ from modules.utils.permission.permissions import AdminPermission
 
 @api_controller(
     '/users',
-    tags=['Rota de Usuários'],
+    tags=['Rota - Usuários'],
 )
 
 class UsersController:

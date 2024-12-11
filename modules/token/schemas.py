@@ -13,7 +13,6 @@ class CustomTokenOutObtain(Schema):
 class CustomTokenObtain(TokenObtainPairInputSchema):
     @model_validator(mode="before")
     def validate_inputs(cls, values: DjangoGetter, info: ValidationInfo) -> DjangoGetter:
-        print(f"Valores recebidos: {values._obj}")
         input_values = values._obj
         request = values._context.get('request')
         if isinstance(input_values, dict):

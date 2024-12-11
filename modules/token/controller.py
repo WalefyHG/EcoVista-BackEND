@@ -5,7 +5,7 @@ from .schemas import CustomTokenObtain, CustomTokenOutObtain
 
 @api_controller(
     "/token",
-    tags=["Token"],
+    tags=["Rota - Token"],
     auth=None
 )
 
