@@ -52,6 +52,7 @@ class Command(BaseCommand):
         self.create_repository(app_dir)
         self.create_schemas(app_dir)
         self.create_controllers(app_dir)
+        self.create_services(app_dir)
 
         self.stdout.write(self.style.SUCCESS(f"App '{app_name}' criado com sucesso em 'modules/{app_name}'"))
 
@@ -79,6 +80,13 @@ class Command(BaseCommand):
         with open(controllers_file, "w") as f:
             f.write(
                 "# Controllers"
+            )
+        self.stdout.write(self.style.SUCCESS(f"Arquivo 'controllers.py' criado em '{app_dir}'"))
+    def create_services(self, app_dir):
+        services_file = os.path.join(app_dir, "services.py")
+        with open(services_file, "w") as f:
+            f.write(
+                "# Services"
             )
         self.stdout.write(self.style.SUCCESS(f"Arquivo 'controllers.py' criado em '{app_dir}'"))
 
