@@ -62,7 +62,6 @@ class Services:
         *,
         id: int,
         payload: Dict[str, Any],
-        file: Optional[UploadedFile] = File(None),
         **kwargs
     ) -> Tuple[int, Union[models.Model, Dict[str, str]]]:
         
@@ -82,7 +81,7 @@ class Services:
                 instance: models.Model = message_or_object
 
                 instance = cls.repository.put(
-                    instance=instance, payload=payload, file=file, id=id
+                    instance=instance, payload=payload, id=id,
                 )
                 return status.HTTP_201_CREATED, instance
             
@@ -107,6 +106,34 @@ class Services:
                 instance = cls.repository.delete(instance=instance)
 
                 return status.HTTP_204_NO_CONTENT, instance
+            
+        except IntegrityError as error:
+            return status.HTTP_500_INTERNAL_SERVER_ERROR, {"message": str(error)}
+        
+    @classmethod
+    def put_picture(
+        cls,
+        *,
+        id: int,
+        file: UploadedFile,
+        **kwargs
+    ) -> Tuple[int, Union[models.Model, Dict[str, str]]]:
+        try:
+            with transaction.atomic():
+                status_code: int
+                message_or_object: Dict[str, str] | models.Model
+
+                status_code, message_or_object = cls.get(id=id)
+                if status_code != status.HTTP_200_OK:
+                    return status_code, message_or_object
+                
+                instance: models.Model = message_or_object
+
+                instance = cls.repository.picture_update(
+                    instance=instance, file=file, id=id
+                )
+
+                return status.HTTP_201_CREATED, instance
             
         except IntegrityError as error:
             return status.HTTP_500_INTERNAL_SERVER_ERROR, {"message": str(error)}

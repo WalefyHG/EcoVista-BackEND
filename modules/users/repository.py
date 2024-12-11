@@ -67,44 +67,18 @@ class Repository:
         id: int,
         instance: models.Model,
         payload: Dict,
-        file: Optional[UploadedFile] = File(None),
         **kwargs
     ) -> models.Model:
         
-       instance = cls.get(id=id)
-
-    # Atualizar o payload (a lógica de atualização de senha ou outros campos pode ser aqui)
-       payload = cls.update_payload(payload=payload)
-
-    # Se um arquivo for enviado, salva o arquivo e adiciona o caminho ao payload
-       if file:
-            upload_dir = os.path.join(settings.MEDIA_ROOT, 'profile_pictures')
-
-        # Criar o diretório se não existir
-            if not os.path.exists(upload_dir):
-                os.makedirs(upload_dir)
-
-        # Define o nome do arquivo
-            file_name = f"{instance.id}_{file.name}"
-            file_path = os.path.join(upload_dir, file_name)
-
-        # Salva o arquivo
-            with open(file_path, 'wb+') as f:
-                for chunk in file.chunks():
-                    f.write(chunk)
-
-        # Atualiza o campo profile_picture no payload
-            payload["profile_picture"] = os.path.join('profile_pictures', file_name)
-
-    # Atualiza os atributos da instância apenas se o valor não for None
-       for attr, value in payload.items():
-            if value is not None:  # Verifica se o valor não é None antes de atribuir
-                setattr(instance, attr, value)
-                print(f"{attr} = {value}")  # Print para debugar
-
-       instance.save()
+        instance = cls.get(id=id)
     
-       return instance
+        for attr, value in payload.items():
+            if value:
+                setattr(instance, attr, value)
+                print(f"{attr} = {value}")
+        instance.save()
+    
+        return instance
     
     @classmethod
     def delete(
@@ -113,3 +87,29 @@ class Repository:
         instance.delete()
         return instance
     
+    
+    @classmethod
+    def put_picture(
+        cls,
+        *,
+        id: int,
+        file: UploadedFile,
+        **kwargs
+    ) -> models.Model:
+        
+        instance = cls.get(id=id)
+        
+        upload_dir = os.path.join(settings.MEDIA_ROOT, 'profile_pictures')
+        if not os.path.exists(upload_dir):
+            os.makedirs(upload_dir)
+
+        file_name = f"{file.name}"
+
+        file_path = os.path.join(upload_dir, file_name)
+
+        with open(file_path, 'wb+') as f:
+            for chunk in file.chunks():
+                f.write(chunk)
+        instance.profile_picture = os.path.join('profile_pictures', file_name)
+        instance.save()
+        return instance

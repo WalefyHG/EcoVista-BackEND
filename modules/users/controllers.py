@@ -28,21 +28,14 @@ class UsersController:
         
         return self.services.post(payload=payload.dict(), file=profile_picture)
     
-    @route.put('/{id}', response={200: UserListSchema, 500: ErrorResponse})
-    def put(self, request, id: int, payload: UserPutSchema = Form(...), profile_picture: UploadedFile = File(None)):
-        
-        payload_dict = payload.dict(exclude_unset=True)
-        
-        if profile_picture:
-            payload_dict['profile_picture'] = profile_picture
-        
-        status_code, result = self.services.put(id=id, payload=payload_dict, file=profile_picture)
-        
-        return result
-        
-        
+    @route.put('/{id}', response={201: UserListSchema, 400: ErrorResponse, 500: ErrorResponse})
+    def put(self, request, id: int, payload: UserPutSchema = Form(...)):
+        return self.services.put(id=id, payload=payload.dict())
     
     @route.delete('/{id}', response={204: None})
     def delete(self, request, id: int):
         return self.services.delete(id=id)
     
+    @route.put('picture/{id}', response={201: UserListSchema, 400: ErrorResponse, 500: ErrorResponse})
+    def put_picture(self, request, id: int, profile_picture: UploadedFile = File(...)):
+        return self.services.put_picture(id=id, file=profile_picture)

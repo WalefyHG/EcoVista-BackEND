@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Optional
-from ninja import Schema, UploadedFile
+from ninja import Schema, UploadedFile, Field
 from datetime import datetime
 
 
@@ -15,11 +15,10 @@ class UserPostSchema(Schema):
     role: RoleFilterEnum
     
 class UserPutSchema(Schema):
-    username: Optional[str] = None
-    email: Optional[str] = None
-    password: Optional[str] = None
-    role: Optional[RoleFilterEnum] = None
-    profile_picture: Optional[UploadedFile] = None
+    username: str = Field(None, alias="username", required=False, title="Nome de usuário")
+    email: str = Field(None, alias="email", required=False, title="Email")
+    password: str = Field(None, alias="password", required=False, title="Senha")
+    role: RoleFilterEnum = None
     
 class UserListSchema(Schema):
     id: int
