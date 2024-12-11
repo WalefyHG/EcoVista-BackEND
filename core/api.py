@@ -10,6 +10,8 @@ from modules.users.controllers import UsersController
 from modules.token.controller import TokenController
 from modules.biomes.controllers import BiomesController
 from modules.picture.controllers import PictureController
+from modules.reports.controllers import ReportingController
+
 
 api = NinjaExtraAPI(
     title= "EcoVista API",
@@ -43,3 +45,6 @@ api.register_controllers(BiomesController)
 
 # Picture Controllers
 api.register_controllers(PictureController)
+
+# Reports Controllers
+api.register_controllers(ReportingController)
