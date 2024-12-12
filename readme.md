@@ -36,12 +36,7 @@ Este é o repositório do back-end do projeto EcoVista, desenvolvido utilizando 
     pip install -r requirements.txt
     ```
 
-6. Inicialize o repositório Git:
-    ```bash
-    git init
-    ```
-
-7. Configure o commit-msg hook utilizando o script `setup_commits.sh`:
+6. Configure o commit-msg hook utilizando o script `setup_commits.sh`:
     ```bash
     ./setup_commits.sh
     ```
