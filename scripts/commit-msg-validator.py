@@ -1,7 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import sys
 import re
 import subprocess
+
 
 # Regex para validar Conventional Commits
 PATTERN = r"^(feat|fix|chore|refactor|test|docs|style|ci|perf)(\([\w\-]+\))?: .{1,72}$"
