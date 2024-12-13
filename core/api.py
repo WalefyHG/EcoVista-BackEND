@@ -2,7 +2,7 @@ from ninja import Swagger
 from ninja_extra import NinjaExtraAPI
 from ninja_jwt.authentication import JWTAuth
 from django.contrib.admin.views.decorators import staff_member_required
-
+from scalar_django_ninja import ScalarViewer
 
 # Import Controllers
 
@@ -20,18 +20,11 @@ api = NinjaExtraAPI(
     app_name= "ecovista",
     auth=JWTAuth(),
     docs_decorator=staff_member_required,
-    docs=Swagger(
-        settings={
-            'docExpansion': 'none',
-            'tagsSorter': 'alpha',
-            'filter': True,
-            'syntaxHighlight': {
-                'theme': 'monokai',
-                'activate': True,
-            },
-            'persistAuthorization': True,
-        }
+    docs=ScalarViewer(
+        title="EcoVista API",
+        openapi_url="/api/v1/openapi.json",
     ),
+    docs_url="/docs/",
     urls_namespace="ecovista_api"
 )
 

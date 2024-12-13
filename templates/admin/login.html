@@ -1,0 +1,60 @@
+{% extends "admin/login.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    <script type="text/javascript">
+    // Função para exibir mensagens de erro
+    function showErrorMessage(message) {
+        const div = document.createElement("div");
+        div.className = "errornote";
+        div.innerHTML = message;
+        document.querySelector("#content").insertBefore(div, document.querySelector("#content").firstChild);
+        document.querySelectorAll(".errornote").forEach(function (el) {
+            if (el !== div) {
+                el.remove();
+            }
+        });
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        localStorage.removeItem("authorized"); // Remove qualquer token existente
+        
+        const form = document.querySelector("#login-form");
+
+        form.onsubmit = function (e) {
+            e.preventDefault();  // Previne o envio tradicional do formulário
+            
+            const email = form.querySelector("input[name='username']").value;
+            const password = form.querySelector("input[name='password']").value;
+            const csrftoken = document.querySelector("input[name='csrfmiddlewaretoken']").value;
+    
+            // Faz a requisição POST para a API de autenticação
+            fetch("/api/v1/token/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({ email, password }), // Envia os dados de login
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    // Armazena o token no localStorage
+                    localStorage.setItem("authorized", JSON.stringify({ JWTAuth: { value: data.token } }));
+                    
+                    // Após armazenar o token, submete o formulário de login
+                    form.submit();
+                } else {
+                    showErrorMessage(data.detail || data.message || "Erro desconhecido");
+                }
+            })
+            .catch(error => {
+                showErrorMessage(error.message || "Erro ao tentar autenticar");
+            });
+        };
+    });
+    </script>
+{% endblock %}

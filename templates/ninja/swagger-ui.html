@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swagger UI</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.5/swagger-ui.css" />
+    <style>
+        /* Custom Styles for Swagger UI */
+        .swagger-ui .topbar { display: none; }
+    </style>
+</head>
+<body>
+    <div id="swagger-ui"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.5/swagger-ui-bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.5/swagger-ui-standalone-preset.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            // Recupera o token JWT do localStorage
+            const token = localStorage.getItem("authorized")
+                ? JSON.parse(localStorage.getItem("authorized")).JWTAuth.value
+                : null;
+
+            // Se o token existir, configura o Swagger UI para incluí-lo nas requisições
+            if (token) {
+                SwaggerUIBundle({
+                    url: "/swagger.json",  // Caminho para o arquivo OpenAPI JSON
+                    dom_id: '#swagger-ui',
+                    deepLinking: true,
+                    presets: [
+                        SwaggerUIBundle.presets.apis,
+                        SwaggerUIBundle.presets.https
+                    ],
+                    requestInterceptor: (req) => {
+                        req.headers['Authorization'] = `Bearer ${token}`;
+                        return req;
+                    },
+                    plugins: [
+                        SwaggerUIBundle.plugins.DownloadUrl
+                    ]
+                });
+            } else {
+                // Se não houver token, apenas inicializa o Swagger UI sem autenticação
+                SwaggerUIBundle({
+                    url: "/swagger.json",  // Caminho para o arquivo OpenAPI JSON
+                    dom_id: '#swagger-ui',
+                    deepLinking: true,
+                    presets: [
+                        SwaggerUIBundle.presets.apis,
+                        SwaggerUIBundle.presets.https
+                    ],
+                    plugins: [
+                        SwaggerUIBundle.plugins.DownloadUrl
+                    ]
+                });
+            }
+        });
+    </script>
+</body>
+</html>
