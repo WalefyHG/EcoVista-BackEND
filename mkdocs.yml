@@ -1,3 +1,31 @@
-site_name: EcoVista Documentação
+markdown_extensions:
+- codehilite
+- toc
+nav:
+- Inicio: index.md
+- API:
+  - biomes: api/biomes/index.md
+  - comments: api/comments/index.md
+  - heart: api/heart/index.md
+  - notification: api/notification/index.md
+  - picture: api/picture/index.md
+  - reports: api/reports/index.md
+  - token: api/token/index.md
+  - users: api/users/index.md
+  - utils: api/utils/index.md
 
-theme: material
+
+plugins:
+- search
+- gen-files:
+    scripts:
+    - core/management/commands/gen_docs.py
+site_name: "EcoVista Documentação"
+theme:
+  font:
+    code: Roboto Mono
+    text: Roboto
+  name: material
+  palette:
+    accent: light-green
+    primary: green

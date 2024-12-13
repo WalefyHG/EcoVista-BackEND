@@ -15,7 +15,7 @@ from modules.reports.controllers import ReportingController
 
 api = NinjaExtraAPI(
     title= "EcoVista API",
-    version= "1.0.0",
+    version= "1.1.0",
     description= "Nossa API",
     app_name= "ecovista",
     auth=JWTAuth(),
@@ -31,7 +31,8 @@ api = NinjaExtraAPI(
             },
             'persistAuthorization': True,
         }
-    )
+    ),
+    urls_namespace="ecovista_api"
 )
 
 # User Controllers
