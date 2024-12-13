@@ -1826,6 +1826,26 @@ files = [
 requests = ">=2.0.1,<3.0.0"
 
 [[package]]
+name = "scalar-django-ninja"
+version = "0.1.0"
+description = "Scalar Django Ninja"
+optional = false
+python-versions = "^3.11"
+files = []
+develop = false
+
+[package.dependencies]
+django-ninja = "^1.1.0"
+typing_extensions = "^4.11.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/scalar/scalar.git"
+reference = "HEAD"
+resolved_reference = "1a88e68201932001950b0c21eb7f4537ff2957c1"
+subdirectory = "packages/scalar_django_ninja"
+
+[[package]]
 name = "secretstorage"
 version = "3.3.3"
 description = "Python bindings to FreeDesktop.org Secret Service API"
@@ -2076,4 +2096,4 @@ test = ["pytest"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "a7f81baf6e0ea268dbc8dbd04d6bd80491a1474c25f9bcc0ebcff87082c00a38"
+content-hash = "024b9760bdb8245600f07a1725a8d6afb45135c802f914d8b330a4f535423469"
