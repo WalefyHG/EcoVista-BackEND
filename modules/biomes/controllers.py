@@ -11,8 +11,11 @@ from ninja_extra import api_controller, route
 
 class BiomesController:
     
-    @route.get('', )
+    @route.get('')
     def list(self, request):
+        """
+        List all biomes
+        """
         return 'list'
     
     @route.get('/{id}', )

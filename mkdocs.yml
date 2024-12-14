@@ -1,10 +1,14 @@
 markdown_extensions:
-- codehilite
+- codehilite:
+    guess_lang: false
+    pygments_style: monokai
 - toc
+
+
 nav:
 - Inicio: index.md
 - API:
-  - biomes: api/biomes/index.md
+  - Biomes: api/Biomes/index.md
   - comments: api/comments/index.md
   - heart: api/heart/index.md
   - notification: api/notification/index.md
@@ -20,7 +24,12 @@ plugins:
 - gen-files:
     scripts:
     - core/management/commands/gen_docs.py
+- mkdocstrings
+
+
 site_name: "EcoVista Documentação"
+
+
 theme:
   font:
     code: Roboto Mono
@@ -29,3 +38,6 @@ theme:
   palette:
     accent: light-green
     primary: green
+
+extra_css:
+  - /styles/mkdocs.css
