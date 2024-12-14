@@ -17,19 +17,21 @@
             }
         });
     }
-    
+
     document.addEventListener("DOMContentLoaded", function () {
-        localStorage.removeItem("authorized"); // Remove qualquer token existente
-        
+        // Remove qualquer token JWT existente
+        localStorage.removeItem("authorized");
+
         const form = document.querySelector("#login-form");
 
+        // Configura o comportamento do envio do formulário de login
         form.onsubmit = function (e) {
             e.preventDefault();  // Previne o envio tradicional do formulário
             
             const email = form.querySelector("input[name='username']").value;
             const password = form.querySelector("input[name='password']").value;
             const csrftoken = document.querySelector("input[name='csrfmiddlewaretoken']").value;
-    
+
             // Faz a requisição POST para a API de autenticação
             fetch("/api/v1/token/login", {
                 method: "POST",
@@ -42,19 +44,22 @@
             .then(response => response.json())
             .then(data => {
                 if (data.token) {
-                    // Armazena o token no localStorage
+                    // Armazena o token JWT no localStorage
                     localStorage.setItem("authorized", JSON.stringify({ JWTAuth: { value: data.token } }));
                     
                     // Após armazenar o token, submete o formulário de login
                     form.submit();
                 } else {
+                    // Caso ocorra algum erro, exibe a mensagem de erro
                     showErrorMessage(data.detail || data.message || "Erro desconhecido");
                 }
             })
             .catch(error => {
+                // Exibe qualquer erro ocorrido durante a autenticação
                 showErrorMessage(error.message || "Erro ao tentar autenticar");
             });
         };
+
     });
     </script>
 {% endblock %}

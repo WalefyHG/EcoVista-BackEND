@@ -16,7 +16,7 @@ from modules.reports.controllers import ReportingController
 api = NinjaExtraAPI(
     title= "EcoVista API",
     version= "1.1.0",
-    description= "Nossa API",
+    description= "Esta é a descrição básica do projeto EcoVista. Este projeto tem como objetivo fornecer uma API para gerenciar usuários, tokens, biomas, imagens e relatórios.",
     app_name= "ecovista",
     auth=JWTAuth(),
     docs_decorator=staff_member_required,
